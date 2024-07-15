@@ -7,11 +7,10 @@ import {
 } from '@apollo/client/core'
 import { print } from 'graphql/language/printer'
 
-import request from './request'
 import extractFiles from './extractFiles'
 import { isObject } from './validators'
 
-export const createUploadMiddleware = ({ uri, headers, fetch, credentials }) =>
+export const createUploadMiddleware = ({ uri, headers, fetch: customFetch, credentials }) =>
   new ApolloLink((operation, forward) => {
     if (typeof FormData !== 'undefined' && isObject(operation.variables)) {
       const { variables, files } = extractFiles(operation.variables)
@@ -35,10 +34,10 @@ export const createUploadMiddleware = ({ uri, headers, fetch, credentials }) =>
         // add context.fetchOptions to fetch options
         options = Object.assign(context.fetchOptions || {}, options)
 
-        // is there a custom fetch? then use it
-        if (fetch) {
+        const runtimeFetch = customFetch || fetch;
+
           return new Observable(observer => {
-            fetch(uri, options)
+            runtimeFetch(uri, options)
               .then(response => {
                 operation.setContext({ response })
                 return response
@@ -57,16 +56,6 @@ export const createUploadMiddleware = ({ uri, headers, fetch, credentials }) =>
                 observer.error(err)
               })
           })
-        } else {
-          const withCredentials = credentials === 'include'
-          return request({
-            uri,
-            body: formData,
-            headers: Object.assign({}, contextHeaders, headers),
-            withCredentials,
-            crossDomain: withCredentials,
-          })
-        }
       }
     }
 

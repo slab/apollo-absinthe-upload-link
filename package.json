@@ -8,14 +8,11 @@
   "author": "Ihor Katkov",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "compile": "yarn rimraf lib/* && yarn babel src -d lib && yarn rimraf lib/__tests__ && yarn rimraf lib/__mocks__",
-    "prepublish": "npm run compile"
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.0.0",
-    "graphql": "^15.0.0",
-    "rxjs": "~6.2.2"
+    "graphql": "^15.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -32,8 +29,5 @@
     "prettier": "1.9.2",
     "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.2"
-  },
-  "peerDependencies": {
-    "rxjs": ">=6.0.0"
   }
 }
