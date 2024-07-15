@@ -1,5 +1,3 @@
-[![Build Status](https://semaphoreci.com/api/v1/ihorkatkov/apollo-absinthe-upload-link/branches/master/badge.svg)](https://semaphoreci.com/ihorkatkov/apollo-absinthe-upload-link)
-
 # Apollo-Absinthe-Upload-Link
 
 A network interface for Apollo that enables file-uploading to Absinthe back
@@ -12,7 +10,7 @@ in the construction of your `ApolloClient`-instance.
 
 ```js
 import ApolloClient from "apollo-client";
-import { createLink } from "apollo-absinthe-upload-link";
+import { createLink } from "slab-apollo-absinthe-upload-link";
 
 const client = new ApolloClient({
     link: createLink({
@@ -27,7 +25,7 @@ Custom headers can be passed through options of the link.
 
 ```js
 import ApolloClient from "apollo-client";
-import { createLink } from "apollo-absinthe-upload-link";
+import { createLink } from "slab-apollo-absinthe-upload-link";
 
 const headers = { authorization: 1234 } 
 const client = new ApolloClient({
@@ -44,7 +42,7 @@ You can use the fetch option when creating an apollo-absinthe-upload-link to do 
 
 ```js
 import ApolloClient from "apollo-client";
-import { createLink } from "apollo-absinthe-upload-link";
+import { createLink } from "slab-apollo-absinthe-upload-link";
 
 const customFetch = (uri, options) => {
   const { header } = Hawk.client.header(

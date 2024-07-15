@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+DIST=dist
+
+TMPDIR=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+npx tsc --declaration --emitDeclarationOnly --outDir $TMPDIR
+
+rm -rf $DIST
+mkdir $DIST
+mv $TMPDIR/src/* $DIST
+rm -rf $TMPDIR
+npx babel src --out-dir $DIST --copy-files --no-copy-ignored --extensions .ts --source-maps
+rm -rf $DIST/__*__
+cp package.json $DIST
+cp README.md $DIST
