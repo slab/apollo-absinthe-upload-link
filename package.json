@@ -1,6 +1,6 @@
 {
   "name": "slab-apollo-absinthe-upload-link",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A network interface for Apollo that enables file-uploading to Absinthe back ends.",
   "main": "index.js",
   "repository": "https://github.com/slab/apollo-absinthe-upload-link",
